@@ -14,7 +14,7 @@ pipeline{
                 }
             }
             }
-            stage("Deploying Tomcat Image"){
+            stage("Creating Tomcat image."){
                 agent{
                     label 'slave-node'
                 }
@@ -27,6 +27,20 @@ pipeline{
                     cd $original_pwd
                     sh '''
                 }
+            }
+            stage('Deploying it to staging environment'){
+                agent{
+                    label 'slave-node'
+                }
+                steps{
+                    echo "Running app on staging ENV"
+                    sh '''
+                    docker stop tomcatInstanceStaging || true
+                    docker rm tomcatInstanceStaging || true
+                    docker run -itd --name tomcatInstanceStaging -p 8082:8080 localtomcatimg:$BUILD_NUMBER
+                    sh '''
+                }
+            }
             }
     }
 }
