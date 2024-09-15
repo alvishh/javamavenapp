@@ -40,6 +40,20 @@ pipeline{
                     docker run -itd --name tomcatInstanceStaging -p 8082:8080 localtomcatimg:$BUILD_NUMBER
                     sh '''
                 }
+                //rename the warfilename in dockerfile to root directory.
+            }
+            stage('Deploying in Production Environment')
+            agent{
+                    label 'slave-node'
+                }
+            steps{
+                timeout(time:1 ,unit:'DAYS')
+                input message:'Approve production Deployment?'
+                sh '''
+                    docker stop tomcatInstanceStaging || true
+                    docker rm tomcatInstanceStaging || true
+                    docker run -itd --name tomcatInstanceStaging -p 8084:8080 localtomcatimg:$BUILD_NUMBER
+                    sh '''
             }
         }
 }
