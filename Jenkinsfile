@@ -3,9 +3,10 @@ pipeline{
         label 'slave-node'
     }
         stages{
-            stages('Build Application'){
+            stage('Build Application'){
+                steps {
                 sh 'mvn -f javamavenapp/pom.xml clean package'
-            }
+                }
             post{
                 success{
                     echo "Now Archiving the Artifacts...."
@@ -13,4 +14,5 @@ pipeline{
                 }
             }
         }
+    }
 }
