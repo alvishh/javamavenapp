@@ -58,7 +58,7 @@ pipeline{
                 }
             }
         }
-        
+
         post{
             always { 
             mail to: 'aluii07sh@gmail.com',
@@ -82,7 +82,7 @@ pipeline{
                 $BUILD_URL
                 and verify the details.
                 Regards,
-                DevOps Team""", cc: '', from: '', replyTo: '', subject: 'BUILD FAILED NOTIFICATION', to: 'devopsuryaraj@gmail.com'
+                DevOps Team""", cc: '', from: '', replyTo: '', subject: 'BUILD FAILED NOTIFICATION', to: 'aluii07sh@gmail.com'
             }
         }
 }
