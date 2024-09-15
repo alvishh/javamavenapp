@@ -2,7 +2,7 @@ pipeline{
     agent{
         label 'slave-node'
     }
-        stage{
+        stages{
             stage('Build Application'){
                 sh 'mvn -f javamavenapp/pom.xml clean package'
             }
