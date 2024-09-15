@@ -47,8 +47,9 @@ pipeline{
                     label 'slave-node'
                 }
                 steps{
-                    timeout(time:1 ,unit:'DAYS')
-                    input message:'Approve production Deployment?'
+                    timeout(time:1 ,unit:'DAYS'){
+                        input message:'Approve production Deployment?'
+                    }
                     sh '''
                         docker stop tomcatInstanceStaging || true
                         docker rm tomcatInstanceStaging || true
