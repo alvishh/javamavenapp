@@ -28,9 +28,6 @@ pipeline{
                     sh '''
                 }
             }
-            stage(''){
-
-            }
             stage('Deploying it to staging environment'){
                 agent{
                     label 'slave-node'
